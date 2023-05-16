@@ -1,6 +1,6 @@
 url: http://localhost:3003/v1/graphql
 headers:
-  X-Hasura-Admin-Secret: 1q2a3z4w5s6x
+  X-Hasura-Admin-Secret: changeme
 queries:
   - name: remote-schemas-10k
     tools: [autocannon]
@@ -11,7 +11,13 @@ queries:
         token(limit: 10000) {
           address
           decimals
-          dex_metadata_token_id {
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+          token_metadata {
             contract
             error
             id
@@ -23,12 +29,6 @@ queries:
             status
             token_id
           }
-          id
-          name
-          standard
-          symbol
-          thumbnail_uri
-          token_id
         }
       }
   - name: remote-schemas-1k
@@ -40,7 +40,13 @@ queries:
         token(limit: 1000) {
           address
           decimals
-          dex_metadata_token_id {
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+          token_metadata {
             contract
             error
             id
@@ -52,12 +58,6 @@ queries:
             status
             token_id
           }
-          id
-          name
-          standard
-          symbol
-          thumbnail_uri
-          token_id
         }
       }
   - name: remote-schemas-10
@@ -69,7 +69,13 @@ queries:
         token(limit: 10) {
           address
           decimals
-          dex_metadata_token_id {
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+          token_metadata {
             contract
             error
             id
@@ -81,12 +87,6 @@ queries:
             status
             token_id
           }
-          id
-          name
-          standard
-          symbol
-          thumbnail_uri
-          token_id
         }
       }
   - name: remote-schemas-100
@@ -98,7 +98,13 @@ queries:
         token(limit: 100) {
           address
           decimals
-          dex_metadata_token_id {
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+          token_metadata {
             contract
             error
             id
@@ -110,12 +116,6 @@ queries:
             status
             token_id
           }
-          id
-          name
-          standard
-          symbol
-          thumbnail_uri
-          token_id
         }
       }
   - name: remote-schemas-Max1k
@@ -127,7 +127,13 @@ queries:
         token(limit: 1000) {
           address
           decimals
-          dex_metadata_token_id {
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+          token_metadata {
             contract
             error
             id
@@ -139,11 +145,5 @@ queries:
             status
             token_id
           }
-          id
-          name
-          standard
-          symbol
-          thumbnail_uri
-          token_id
         }
       }
