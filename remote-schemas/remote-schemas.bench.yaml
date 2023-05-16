@@ -1,6 +1,6 @@
 url: http://localhost:3003/v1/graphql
 headers:
-  X-Hasura-Admin-Secret: changeme
+  X-Hasura-Admin-Secret: 1q2a3z4w5s6x
 queries:
   - name: remote-schemas-10k
     tools: [autocannon]
