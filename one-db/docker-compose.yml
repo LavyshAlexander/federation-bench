@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    ports:
+      - 127.0.0.1:5001:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=dipdup
+      - POSTGRES_DB=dipdup
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-1q2a3z4w5s6x}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U dipdup" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db:

@@ -1,0 +1,34 @@
+{
+  "errors": [
+    {
+      "extensions": {
+        "code": "remote-schema-error",
+        "internal": {
+          "message": "No response data received",
+          "request": {
+            "host": "hasura-metadata",
+            "method": "POST",
+            "path": "/v1/graphql",
+            "port": 8080,
+            "queryString": "",
+            "requestHeaders": {
+              "Content-Type": "application/json",
+              "User-Agent": "hasura-graphql-engine/v2.24.0",
+              "X-B3-ParentSpanId": "c8dcf49d99aa6d14",
+              "X-B3-Sampled": "1",
+              "X-B3-SpanId": "e3d01a1df2e6e62c",
+              "X-B3-TraceId": "be5c5eb3fb0bc30df41096afda829c48",
+              "x-hasura-admin-secret": "1q2a3z4w5s6x",
+              "x-hasura-role": "admin"
+            },
+            "responseTimeout": "ResponseTimeoutMicro 60000000",
+            "secure": false
+          },
+          "type": "http_exception"
+        },
+        "path": "$"
+      },
+      "message": "HTTP exception occurred while sending the request to \"http://hasura-metadata:8080/v1/graphql\""
+    }
+  ]
+}

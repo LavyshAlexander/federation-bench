@@ -1,0 +1,28 @@
+"""
+token / token_id -> metadata / token_id
+"""
+
+query MyQuery {
+  token(limit: 100000) {
+    address
+    decimals
+    name
+    id
+    standard
+    symbol
+    thumbnail_uri
+    token_id
+    dex_metadata_token_id {
+      contract
+      error
+      id
+      image_processed
+      link
+      metadata
+      network
+      retry_count
+      status
+      token_id
+    }
+  }
+}
