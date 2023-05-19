@@ -2,7 +2,7 @@ url: http://localhost:3003/v1/graphql
 headers:
   X-Hasura-Admin-Secret: 1q2a3z4w5s6x
 queries:
-  # 10k ends up in errors, try to run it separately with k6 tool
+  # # 10k ends up in errors, try to run it separately with k6 tool
   # - name: remote-schemas-10k
   #   tools: [ k6, autocannon ]
   #   execution_strategy: FIXED_REQUEST_NUMBER
