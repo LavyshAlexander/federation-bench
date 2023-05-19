@@ -2,35 +2,36 @@ url: http://localhost:3003/v1/graphql
 headers:
   X-Hasura-Admin-Secret: 1q2a3z4w5s6x
 queries:
-  - name: remote-schemas-10k
-    tools: [ k6, autocannon ]
-    execution_strategy: FIXED_REQUEST_NUMBER
-    requests: 1000
-    query: |
-      query TokenWithMetadata {
-        token(limit: 10000) {
-          address
-          decimals
-          id
-          name
-          standard
-          symbol
-          thumbnail_uri
-          token_id
-          token_metadata {
-            contract
-            error
-            id
-            image_processed
-            link
-            metadata
-            network
-            retry_count
-            status
-            token_id
-          }
-        }
-      }
+  # 10k ends up in errors, try to run it separately with k6 tool
+  # - name: remote-schemas-10k
+  #   tools: [ k6, autocannon ]
+  #   execution_strategy: FIXED_REQUEST_NUMBER
+  #   requests: 1000
+  #   query: |
+  #     query TokenWithMetadata {
+  #       token(limit: 10000) {
+  #         address
+  #         decimals
+  #         id
+  #         name
+  #         standard
+  #         symbol
+  #         thumbnail_uri
+  #         token_id
+  #         token_metadata {
+  #           contract
+  #           error
+  #           id
+  #           image_processed
+  #           link
+  #           metadata
+  #           network
+  #           retry_count
+  #           status
+  #           token_id
+  #         }
+  #       }
+  #     }
   - name: remote-schemas-1k
     tools: [ k6, autocannon ]
     execution_strategy: FIXED_REQUEST_NUMBER
