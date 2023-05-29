@@ -1,75 +1,73 @@
 version: "3.8"
 
 services:
+  db:
+    image: postgres:15.3
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=dipdup
+      - POSTGRES_DB=dipdup
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U dipdup" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement: *placement
+    networks:
+      - pgadmin-private
+    logging: *logging
+
   hasura:
     image: hasura/graphql-engine:v2.25.1
-    ports:
-      - "127.0.0.1:3000:8080"
     depends_on:
       - db
-      - db-dex
-      - db-metadata
     restart: always
     environment:
-      - HASURA_GRAPHQL_METADATA_DATABASE_URL=postgres://dipdup:${POSTGRES_PASSWORD:-1q2a3z4w5s6x}@db:5432/dipdup
       - HASURA_GRAPHQL_ENABLE_CONSOLE=true
       - HASURA_GRAPHQL_DEV_MODE=true
       - HASURA_GRAPHQL_ENABLED_LOG_TYPES=startup, http-log, websocket-log, query-log
       - HASURA_GRAPHQL_LOG_LEVEL=warn
       - HASURA_GRAPHQL_ENABLE_TELEMETRY=false
-      - HASURA_GRAPHQL_ADMIN_SECRET=${ADMIN_SECRET:-1q2a3z4w5s6x}
+      - HASURA_GRAPHQL_ADMIN_SECRET=${ADMIN_SECRET}
       - HASURA_GRAPHQL_UNAUTHORIZED_ROLE=user
       - HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS=true
-
-  db:
-    image: postgres:15.3
-    volumes:
-      - db:/var/lib/postgresql/data
-    ports:
-      - 127.0.0.1:5002:5432
-    environment:
-      - POSTGRES_USER=dipdup
-      - POSTGRES_DB=dipdup
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-1q2a3z4w5s6x}
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U dipdup" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  db-dex:
-    image: postgres:15.3
-    volumes:
-      - db-dex:/var/lib/postgresql/data
-    ports:
-      - 127.0.0.1:5003:5432
-    environment:
-      - POSTGRES_USER=dipdup
-      - POSTGRES_DB=dipdup
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-1q2a3z4w5s6x}
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U dipdup" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  db-metadata:
-    image: postgres:15.3
-    volumes:
-      - db-metadata:/var/lib/postgresql/data
-    ports:
-      - 127.0.0.1:5004:5432
-    environment:
-      - POSTGRES_USER=dipdup
-      - POSTGRES_DB=dipdup
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-1q2a3z4w5s6x}
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U dipdup" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - HASURA_GRAPHQL_METADATA_DATABASE_URL=postgres://dipdup:${POSTGRES_PASSWORD:-changeme}@federation_db:5432/dipdup
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement: &placement
+        constraints:
+          - node.hostname == ${NODE_HOSTNAME}
+      labels:
+        - ingress=true
+        - traefik.enable=true
+        - traefik.http.services.${HASURA_SERVICE}.loadbalancer.server.port=8080
+        - "traefik.http.routers.${HASURA_SERVICE}.rule=Host(`${HASURA_HOST}`) && (PathPrefix(`/v1/graphql`) || PathPrefix(`/api/rest`))"
+        - traefik.http.routers.${HASURA_SERVICE}.entrypoints=http,ingress
+        - "traefik.http.routers.${HASURA_SERVICE}-console.rule=Host(`${HASURA_SERVICE}.${SWARM_ROOT_DOMAIN}`)"
+        - traefik.http.routers.${HASURA_SERVICE}-console.entrypoints=https
+        - traefik.http.middlewares.${HASURA_SERVICE}-console.headers.customrequestheaders.X-Hasura-Admin-Secret=${ADMIN_SECRET}
+        - traefik.http.routers.${HASURA_SERVICE}-console.middlewares=authelia@docker,${HASURA_SERVICE}-console
+    networks:
+      - pgadmin-private
+      - traefik-public
+    logging: &logging
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "10"
+        tag: "{{.Name}}.{{.ImageID}}"
 
 volumes:
   db:
-  db-dex:
-  db-metadata:
+
+networks:
+  traefik-public:
+    external: true
+  pgadmin-private:
+    external: true
