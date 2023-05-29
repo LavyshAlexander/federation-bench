@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   hasura:
-    image: hasura/graphql-engine:v2.23.0
+    image: hasura/graphql-engine:v2.25.1
     ports:
       - "127.0.0.1:3000:8080"
     depends_on:
@@ -22,7 +22,7 @@ services:
       - HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS=true
 
   db:
-    image: postgres:14
+    image: postgres:15.3
     volumes:
       - db:/var/lib/postgresql/data
     ports:
@@ -38,7 +38,7 @@ services:
       retries: 5
 
   db-dex:
-    image: postgres:15
+    image: postgres:15.3
     volumes:
       - db-dex:/var/lib/postgresql/data
     ports:
@@ -54,7 +54,7 @@ services:
       retries: 5
 
   db-metadata:
-    image: postgres:15
+    image: postgres:15.3
     volumes:
       - db-metadata:/var/lib/postgresql/data
     ports:
