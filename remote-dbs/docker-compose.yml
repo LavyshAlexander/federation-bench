@@ -1,27 +1,6 @@
 version: "3.8"
 
 services:
-  db:
-    image: postgres:15.3
-    volumes:
-      - db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=dipdup
-      - POSTGRES_DB=dipdup
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U dipdup" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement: *placement
-    networks:
-      - pgadmin-private
-    logging: *logging
-
   hasura:
     image: hasura/graphql-engine:v2.25.1
     depends_on:
@@ -62,6 +41,27 @@ services:
         max-size: "10m"
         max-file: "10"
         tag: "{{.Name}}.{{.ImageID}}"
+
+  db:
+    image: postgres:15.3
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=dipdup
+      - POSTGRES_DB=dipdup
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U dipdup" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement: *placement
+    networks:
+      - pgadmin-private
+    logging: *logging
 
 volumes:
   db:
