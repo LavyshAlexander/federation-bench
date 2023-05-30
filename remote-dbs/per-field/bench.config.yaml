@@ -1,13 +1,13 @@
 url: http://localhost:3000/v1/graphql
 headers:
-  X-Hasura-Admin-Secret: changeme
+  X-Hasura-Admin-Secret: 1q2a3z4w5s6x
 queries:
   - name: remote-dbs-10k
     tools: [ k6, autocannon ]
     execution_strategy: FIXED_REQUEST_NUMBER
     requests: 1000
     query: |
-      query TokenWithMetadata {
+      query Token {
         token(limit: 10000) {
           address
           decimals
@@ -24,7 +24,7 @@ queries:
     execution_strategy: FIXED_REQUEST_NUMBER
     requests: 1000
     query: |
-      query TokenWithMetadata {
+      query Token {
         token(limit: 1000) {
           address
           decimals
@@ -41,7 +41,7 @@ queries:
     execution_strategy: FIXED_REQUEST_NUMBER
     requests: 1000
     query: |
-      query TokenWithMetadata {
+      query Token {
         token(limit: 10) {
           address
           decimals
@@ -58,7 +58,7 @@ queries:
     execution_strategy: FIXED_REQUEST_NUMBER
     requests: 1000
     query: |
-      query TokenWithMetadata {
+      query Token {
         token(limit: 100) {
           address
           decimals
@@ -75,7 +75,7 @@ queries:
     execution_strategy: MAX_REQUESTS_IN_DURATION
     duration: 60s
     query: |
-      query TokenWithMetadata {
+      query Token {
         token(limit: 1000) {
           address
           decimals

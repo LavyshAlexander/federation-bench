@@ -1,9 +1,0 @@
-{
-	"scenarios": {
-		"remote-schemas-10k": {
-			"executor": "per-vu-iterations",
-			"iterations": 22,
-			"vus": 1
-		}
-	}
-}
