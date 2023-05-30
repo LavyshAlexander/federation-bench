@@ -1,0 +1,89 @@
+url: http://localhost:3003/v1/graphql
+headers:
+  X-Hasura-Admin-Secret: 1q2a3z4w5s6x
+queries:
+  - name: remote-schemas-10k
+    tools: [ k6, autocannon ]
+    execution_strategy: FIXED_REQUEST_NUMBER
+    requests: 1000
+    query: |
+      query Token {
+        token(limit: 10000) {
+          address
+          decimals
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+        }
+      }
+  - name: remote-schemas-1k
+    tools: [ k6, autocannon ]
+    execution_strategy: FIXED_REQUEST_NUMBER
+    requests: 1000
+    query: |
+      query Token {
+        token(limit: 1000) {
+          address
+          decimals
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+        }
+      }
+  - name: remote-schemas-10
+    tools: [ k6, autocannon ]
+    execution_strategy: FIXED_REQUEST_NUMBER
+    requests: 1000
+    query: |
+      query Token {
+        token(limit: 10) {
+          address
+          decimals
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+        }
+      }
+  - name: remote-schemas-100
+    tools: [ k6, autocannon ]
+    execution_strategy: FIXED_REQUEST_NUMBER
+    requests: 1000
+    query: |
+      query Token {
+        token(limit: 100) {
+          address
+          decimals
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+        }
+      }
+  - name: remote-schemas-Max1k
+    tools: [ k6, autocannon ]
+    execution_strategy: MAX_REQUESTS_IN_DURATION
+    duration: 60s
+    query: |
+      query Token {
+        token(limit: 1000) {
+          address
+          decimals
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+        }
+      }
