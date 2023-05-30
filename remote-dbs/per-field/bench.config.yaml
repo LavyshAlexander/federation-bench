@@ -1,0 +1,89 @@
+url: http://localhost:3000/v1/graphql
+headers:
+  X-Hasura-Admin-Secret: changeme
+queries:
+  - name: remote-dbs-10k
+    tools: [ k6, autocannon ]
+    execution_strategy: FIXED_REQUEST_NUMBER
+    requests: 1000
+    query: |
+      query TokenWithMetadata {
+        token(limit: 10000) {
+          address
+          decimals
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+        }
+      }
+  - name: remote-dbs-1k
+    tools: [ k6, autocannon ]
+    execution_strategy: FIXED_REQUEST_NUMBER
+    requests: 1000
+    query: |
+      query TokenWithMetadata {
+        token(limit: 1000) {
+          address
+          decimals
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+        }
+      }
+  - name: remote-dbs-10
+    tools: [ k6, autocannon ]
+    execution_strategy: FIXED_REQUEST_NUMBER
+    requests: 1000
+    query: |
+      query TokenWithMetadata {
+        token(limit: 10) {
+          address
+          decimals
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+        }
+      }
+  - name: remote-dbs-100
+    tools: [ k6, autocannon ]
+    execution_strategy: FIXED_REQUEST_NUMBER
+    requests: 1000
+    query: |
+      query TokenWithMetadata {
+        token(limit: 100) {
+          address
+          decimals
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+        }
+      }
+  - name: remote-dbs-Max1k
+    tools: [ k6, autocannon ]
+    execution_strategy: MAX_REQUESTS_IN_DURATION
+    duration: 60s
+    query: |
+      query TokenWithMetadata {
+        token(limit: 1000) {
+          address
+          decimals
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+        }
+      }
