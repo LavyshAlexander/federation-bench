@@ -1,0 +1,64 @@
+{
+  "resource_version": 6,
+  "metadata": {
+    "version": 3,
+    "sources": [
+      {
+        "name": "dex",
+        "kind": "postgres",
+        "tables": [
+          {
+            "table": {
+              "name": "token",
+              "schema": "public"
+            },
+            "remote_relationships": [
+              {
+                "definition": {
+                  "to_source": {
+                    "field_mapping": {
+                      "token_id": "token_id"
+                    },
+                    "relationship_type": "object",
+                    "source": "metadata",
+                    "table": {
+                      "name": "token_metadata",
+                      "schema": "public"
+                    }
+                  }
+                },
+                "name": "metadata"
+              }
+            ]
+          }
+        ],
+        "configuration": {
+          "connection_info": {
+            "database_url": "postgres://dipdup:qwerty@db-dex:5432/dipdup",
+            "isolation_level": "read-committed",
+            "use_prepared_statements": false
+          }
+        }
+      },
+      {
+        "name": "metadata",
+        "kind": "postgres",
+        "tables": [
+          {
+            "table": {
+              "name": "token_metadata",
+              "schema": "public"
+            }
+          }
+        ],
+        "configuration": {
+          "connection_info": {
+            "database_url": "postgres://dipdup:qwerty@db-metadata:5432/dipdup",
+            "isolation_level": "read-committed",
+            "use_prepared_statements": false
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "resource_version": 4,
+  "metadata": {
+    "version": 3,
+    "sources": [],
+    "remote_schemas": [
+      {
+        "name": "dex",
+        "definition": {
+          "url": "http://hasura-dex:8080/v1/graphql",
+          "timeout_seconds": 60,
+          "customization": {},
+          "headers": [
+            {
+              "name": "x-hasura-admin-secret",
+              "value": "qwerty"
+            }
+          ],
+          "forward_client_headers": true
+        },
+        "comment": "",
+        "remote_relationships": [
+          {
+            "relationships": [
+              {
+                "definition": {
+                  "to_remote_schema": {
+                    "lhs_fields": [
+                      "token_id"
+                    ],
+                    "remote_field": {
+                      "token_metadata": {
+                        "arguments": {
+                          "where": {
+                            "token_id": {
+                              "_eq": "$token_id"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "remote_schema": "metadata"
+                  }
+                },
+                "name": "metadata"
+              }
+            ],
+            "type_name": "token"
+          }
+        ]
+      },
+      {
+        "name": "metadata",
+        "definition": {
+          "url": "http://hasura-metadata:8080/v1/graphql",
+          "timeout_seconds": 60,
+          "customization": {},
+          "headers": [
+            {
+              "name": "x-hasura-admin-secret",
+              "value": "qwerty"
+            }
+          ],
+          "forward_client_headers": true
+        },
+        "comment": ""
+      }
+    ]
+  }
+}
