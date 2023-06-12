@@ -1,0 +1,457 @@
+./run-pg-opt.sh
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: /Users/lavysh/Source/BakingBad/DipDup/federation-bench/graphql-bench/app/queries/bin/k6/loadScript.js
+     output: json (/Users/lavysh/Source/BakingBad/DipDup/federation-bench/graphql-bench/app/queries/src/executors/k6/tmp/k6_raw_stats.json)
+
+  scenarios: (100.00%) 1 scenario, 10 max VUs, 10m30s max duration (incl. graceful stop):
+           * remote-schemas-10: 100 iterations for each of 10 VUs (maxDuration: 10m0s, gracefulStop: 30s)
+
+
+     ✓ is status 200
+     ✓ no error in body
+
+     checks.........................: 100.00% ✓ 2000        ✗ 0
+     data_received..................: 2.5 MB  7.0 MB/s
+     data_sent......................: 304 kB  846 kB/s
+     http_req_blocked...............: avg=21.66µs min=0s     med=1µs    max=2.18ms  p(90)=1µs    p(95)=2µs
+     http_req_connecting............: avg=4.54µs  min=0s     med=0s     max=479µs   p(90)=0s     p(95)=0s
+     http_req_duration..............: avg=3.34ms  min=1.33ms med=2.59ms max=53.37ms p(90)=4.4ms  p(95)=6.64ms
+       { expected_response:true }...: avg=3.34ms  min=1.33ms med=2.59ms max=53.37ms p(90)=4.4ms  p(95)=6.64ms
+     http_req_failed................: 0.00%   ✓ 0           ✗ 1000
+     http_req_receiving.............: avg=21.17µs min=5µs    med=15µs   max=2.33ms  p(90)=25µs   p(95)=28µs
+     http_req_sending...............: avg=9.42µs  min=2µs    med=5µs    max=378µs   p(90)=10µs   p(95)=12µs
+     http_req_tls_handshaking.......: avg=0s      min=0s     med=0s     max=0s      p(90)=0s     p(95)=0s
+     http_req_waiting...............: avg=3.31ms  min=1.31ms med=2.56ms max=52.7ms  p(90)=4.38ms p(95)=6.61ms
+     http_reqs......................: 1000    2783.522659/s
+     iteration_duration.............: avg=3.45ms  min=1.39ms med=2.65ms max=56.85ms p(90)=4.52ms p(95)=6.7ms
+     iterations.....................: 1000    2783.522659/s
+
+
+running (00m00.4s), 00/10 VUs, 1000 complete and 0 interrupted iterations
+remote-schemas-10 ✓ [======================================] 10 VUs  00m00.4s/10m0s  1000/1000 iters, 100 per VU
+Running 1000 requests test @ http://localhost:3003/v1/graphql
+10 connections
+
+┌─────────┬──────┬──────┬───────┬───────┬────────┬─────────┬──────────┐
+│ Stat    │ 2.5% │ 50%  │ 97.5% │ 99%   │ Avg    │ Stdev   │ Max      │
+├─────────┼──────┼──────┼───────┼───────┼────────┼─────────┼──────────┤
+│ Latency │ 1 ms │ 2 ms │ 7 ms  │ 13 ms │ 2.5 ms │ 2.39 ms │ 24.92 ms │
+└─────────┴──────┴──────┴───────┴───────┴────────┴─────────┴──────────┘
+┌───────────┬─────────┬─────────┬─────────┬─────────┬─────────┬───────┬─────────┐
+│ Stat      │ 1%      │ 2.5%    │ 50%     │ 97.5%   │ Avg     │ Stdev │ Min     │
+├───────────┼─────────┼─────────┼─────────┼─────────┼─────────┼───────┼─────────┤
+│ Req/Sec   │ 1000    │ 1000    │ 1000    │ 1000    │ 1000    │ 0     │ 1000    │
+├───────────┼─────────┼─────────┼─────────┼─────────┼─────────┼───────┼─────────┤
+│ Bytes/Sec │ 2.51 MB │ 2.51 MB │ 2.51 MB │ 2.51 MB │ 2.51 MB │ 0 B   │ 2.51 MB │
+└───────────┴─────────┴─────────┴─────────┴─────────┴─────────┴───────┴─────────┘
+
+Req/Bytes counts sampled once per second.
+
+┌────────────┬──────────────┐
+│ Percentile │ Latency (ms) │
+├────────────┼──────────────┤
+│ 0.001      │ 1            │
+├────────────┼──────────────┤
+│ 0.01       │ 1            │
+├────────────┼──────────────┤
+│ 0.1        │ 1            │
+├────────────┼──────────────┤
+│ 1          │ 1            │
+├────────────┼──────────────┤
+│ 2.5        │ 1            │
+├────────────┼──────────────┤
+│ 10         │ 1            │
+├────────────┼──────────────┤
+│ 25         │ 2            │
+├────────────┼──────────────┤
+│ 50         │ 2            │
+├────────────┼──────────────┤
+│ 75         │ 3            │
+├────────────┼──────────────┤
+│ 90         │ 4            │
+├────────────┼──────────────┤
+│ 97.5       │ 7            │
+├────────────┼──────────────┤
+│ 99         │ 13           │
+├────────────┼──────────────┤
+│ 99.9       │ 23           │
+├────────────┼──────────────┤
+│ 99.99      │ 24           │
+├────────────┼──────────────┤
+│ 99.999     │ 24           │
+└────────────┴──────────────┘
+
+1k requests in 1.04s, 2.51 MB read
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: /Users/lavysh/Source/BakingBad/DipDup/federation-bench/graphql-bench/app/queries/bin/k6/loadScript.js
+     output: json (/Users/lavysh/Source/BakingBad/DipDup/federation-bench/graphql-bench/app/queries/src/executors/k6/tmp/k6_raw_stats.json)
+
+  scenarios: (100.00%) 1 scenario, 10 max VUs, 10m30s max duration (incl. graceful stop):
+           * remote-schemas-100: 100 iterations for each of 10 VUs (maxDuration: 10m0s, gracefulStop: 30s)
+
+
+     ✓ is status 200
+     ✓ no error in body
+
+     checks.........................: 100.00% ✓ 2000        ✗ 0
+     data_received..................: 23 MB   29 MB/s
+     data_sent......................: 305 kB  382 kB/s
+     http_req_blocked...............: avg=18.89µs  min=0s     med=1µs    max=1.78ms  p(90)=2µs     p(95)=2µs
+     http_req_connecting............: avg=5.16µs   min=0s     med=0s     max=565µs   p(90)=0s      p(95)=0s
+     http_req_duration..............: avg=7.6ms    min=2.24ms med=6.54ms max=37.26ms p(90)=11.46ms p(95)=14.31ms
+       { expected_response:true }...: avg=7.6ms    min=2.24ms med=6.54ms max=37.26ms p(90)=11.46ms p(95)=14.31ms
+     http_req_failed................: 0.00%   ✓ 0           ✗ 1000
+     http_req_receiving.............: avg=170.42µs min=14µs   med=42µs   max=6.73ms  p(90)=389.1µs p(95)=793.34µs
+     http_req_sending...............: avg=9.88µs   min=3µs    med=8µs    max=288µs   p(90)=13µs    p(95)=17µs
+     http_req_tls_handshaking.......: avg=0s       min=0s     med=0s     max=0s      p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=7.42ms   min=2.2ms  med=6.39ms max=36.85ms p(90)=11.25ms p(95)=14.05ms
+     http_reqs......................: 1000    1253.369999/s
+     iteration_duration.............: avg=7.78ms   min=2.43ms med=6.7ms  max=37.37ms p(90)=11.7ms  p(95)=14.43ms
+     iterations.....................: 1000    1253.369999/s
+
+
+running (00m00.8s), 00/10 VUs, 1000 complete and 0 interrupted iterations
+remote-schemas-100 ✓ [======================================] 10 VUs  00m00.8s/10m0s  1000/1000 iters, 100 per VU
+Running 1000 requests test @ http://localhost:3003/v1/graphql
+10 connections
+
+┌─────────┬──────┬──────┬───────┬───────┬─────────┬─────────┬──────────┐
+│ Stat    │ 2.5% │ 50%  │ 97.5% │ 99%   │ Avg     │ Stdev   │ Max      │
+├─────────┼──────┼──────┼───────┼───────┼─────────┼─────────┼──────────┤
+│ Latency │ 3 ms │ 6 ms │ 13 ms │ 16 ms │ 6.06 ms │ 2.58 ms │ 19.36 ms │
+└─────────┴──────┴──────┴───────┴───────┴─────────┴─────────┴──────────┘
+┌───────────┬─────────┬─────────┬─────────┬─────────┬─────────┬───────┬─────────┐
+│ Stat      │ 1%      │ 2.5%    │ 50%     │ 97.5%   │ Avg     │ Stdev │ Min     │
+├───────────┼─────────┼─────────┼─────────┼─────────┼─────────┼───────┼─────────┤
+│ Req/Sec   │ 1000    │ 1000    │ 1000    │ 1000    │ 1000    │ 0     │ 1000    │
+├───────────┼─────────┼─────────┼─────────┼─────────┼─────────┼───────┼─────────┤
+│ Bytes/Sec │ 23.1 MB │ 23.1 MB │ 23.1 MB │ 23.1 MB │ 23.1 MB │ 0 B   │ 23.1 MB │
+└───────────┴─────────┴─────────┴─────────┴─────────┴─────────┴───────┴─────────┘
+
+Req/Bytes counts sampled once per second.
+
+┌────────────┬──────────────┐
+│ Percentile │ Latency (ms) │
+├────────────┼──────────────┤
+│ 0.001      │ 2            │
+├────────────┼──────────────┤
+│ 0.01       │ 2            │
+├────────────┼──────────────┤
+│ 0.1        │ 2            │
+├────────────┼──────────────┤
+│ 1          │ 2            │
+├────────────┼──────────────┤
+│ 2.5        │ 3            │
+├────────────┼──────────────┤
+│ 10         │ 3            │
+├────────────┼──────────────┤
+│ 25         │ 4            │
+├────────────┼──────────────┤
+│ 50         │ 6            │
+├────────────┼──────────────┤
+│ 75         │ 7            │
+├────────────┼──────────────┤
+│ 90         │ 9            │
+├────────────┼──────────────┤
+│ 97.5       │ 13           │
+├────────────┼──────────────┤
+│ 99         │ 16           │
+├────────────┼──────────────┤
+│ 99.9       │ 18           │
+├────────────┼──────────────┤
+│ 99.99      │ 19           │
+├────────────┼──────────────┤
+│ 99.999     │ 19           │
+└────────────┴──────────────┘
+
+1k requests in 1.03s, 23.1 MB read
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: /Users/lavysh/Source/BakingBad/DipDup/federation-bench/graphql-bench/app/queries/bin/k6/loadScript.js
+     output: json (/Users/lavysh/Source/BakingBad/DipDup/federation-bench/graphql-bench/app/queries/src/executors/k6/tmp/k6_raw_stats.json)
+
+  scenarios: (100.00%) 1 scenario, 10 max VUs, 10m30s max duration (incl. graceful stop):
+           * remote-schemas-1k: 100 iterations for each of 10 VUs (maxDuration: 10m0s, gracefulStop: 30s)
+
+
+     ✓ is status 200
+     ✓ no error in body
+
+     checks.........................: 100.00% ✓ 2000       ✗ 0
+     data_received..................: 229 MB  32 MB/s
+     data_sent......................: 306 kB  43 kB/s
+     http_req_blocked...............: avg=17.81µs min=0s      med=3µs     max=1.54ms   p(90)=5µs     p(95)=5µs
+     http_req_connecting............: avg=5.07µs  min=0s      med=0s      max=565µs    p(90)=0s      p(95)=0s
+     http_req_duration..............: avg=68.5ms  min=16.83ms med=65.9ms  max=152.55ms p(90)=95.11ms p(95)=104.88ms
+       { expected_response:true }...: avg=68.5ms  min=16.83ms med=65.9ms  max=152.55ms p(90)=95.11ms p(95)=104.88ms
+     http_req_failed................: 0.00%   ✓ 0          ✗ 1000
+     http_req_receiving.............: avg=2.69ms  min=59µs    med=2.07ms  max=29.36ms  p(90)=4.42ms  p(95)=6.59ms
+     http_req_sending...............: avg=23.59µs min=4µs     med=18µs    max=1.21ms   p(90)=28µs    p(95)=33µs
+     http_req_tls_handshaking.......: avg=0s      min=0s      med=0s      max=0s       p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=65.78ms min=15.49ms med=63.08ms max=149.71ms p(90)=91.5ms  p(95)=101.88ms
+     http_reqs......................: 1000    139.196571/s
+     iteration_duration.............: avg=69.98ms min=19.51ms med=67.32ms max=153.78ms p(90)=96.7ms  p(95)=106.15ms
+     iterations.....................: 1000    139.196571/s
+     vus............................: 7       min=7        max=10
+     vus_max........................: 10      min=10       max=10
+
+
+running (00m07.2s), 00/10 VUs, 1000 complete and 0 interrupted iterations
+remote-schemas-1k ✓ [======================================] 10 VUs  00m07.2s/10m0s  1000/1000 iters, 100 per VU
+Running 1000 requests test @ http://localhost:3003/v1/graphql
+10 connections
+
+┌─────────┬───────┬───────┬────────┬────────┬─────────┬──────────┬───────────┐
+│ Stat    │ 2.5%  │ 50%   │ 97.5%  │ 99%    │ Avg     │ Stdev    │ Max       │
+├─────────┼───────┼───────┼────────┼────────┼─────────┼──────────┼───────────┤
+│ Latency │ 34 ms │ 67 ms │ 118 ms │ 129 ms │ 69.2 ms │ 22.11 ms │ 159.85 ms │
+└─────────┴───────┴───────┴────────┴────────┴─────────┴──────────┴───────────┘
+┌───────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
+│ Stat      │ 1%      │ 2.5%    │ 50%     │ 97.5%   │ Avg     │ Stdev   │ Min     │
+├───────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+│ Req/Sec   │ 20      │ 20      │ 139     │ 146     │ 125     │ 39.88   │ 20      │
+├───────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+│ Bytes/Sec │ 4.59 MB │ 4.59 MB │ 31.9 MB │ 33.5 MB │ 28.7 MB │ 9.14 MB │ 4.59 MB │
+└───────────┴─────────┴─────────┴─────────┴─────────┴─────────┴─────────┴─────────┘
+
+Req/Bytes counts sampled once per second.
+
+┌────────────┬──────────────┐
+│ Percentile │ Latency (ms) │
+├────────────┼──────────────┤
+│ 0.001      │ 17           │
+├────────────┼──────────────┤
+│ 0.01       │ 17           │
+├────────────┼──────────────┤
+│ 0.1        │ 17           │
+├────────────┼──────────────┤
+│ 1          │ 30           │
+├────────────┼──────────────┤
+│ 2.5        │ 34           │
+├────────────┼──────────────┤
+│ 10         │ 41           │
+├────────────┼──────────────┤
+│ 25         │ 54           │
+├────────────┼──────────────┤
+│ 50         │ 67           │
+├────────────┼──────────────┤
+│ 75         │ 82           │
+├────────────┼──────────────┤
+│ 90         │ 99           │
+├────────────┼──────────────┤
+│ 97.5       │ 118          │
+├────────────┼──────────────┤
+│ 99         │ 129          │
+├────────────┼──────────────┤
+│ 99.9       │ 155          │
+├────────────┼──────────────┤
+│ 99.99      │ 159          │
+├────────────┼──────────────┤
+│ 99.999     │ 159          │
+└────────────┴──────────────┘
+
+1k requests in 8.04s, 229 MB read
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: /Users/lavysh/Source/BakingBad/DipDup/federation-bench/graphql-bench/app/queries/bin/k6/loadScript.js
+     output: json (/Users/lavysh/Source/BakingBad/DipDup/federation-bench/graphql-bench/app/queries/src/executors/k6/tmp/k6_raw_stats.json)
+
+  scenarios: (100.00%) 1 scenario, 10 max VUs, 10m30s max duration (incl. graceful stop):
+           * remote-schemas-10k: 100 iterations for each of 10 VUs (maxDuration: 10m0s, gracefulStop: 30s)
+
+
+     ✓ is status 200
+     ✓ no error in body
+
+     checks.........................: 100.00% ✓ 2000      ✗ 0
+     data_received..................: 2.3 GB  38 MB/s
+     data_sent......................: 307 kB  5.1 kB/s
+     http_req_blocked...............: avg=13.65µs  min=1µs      med=3µs      max=1.1ms    p(90)=6µs      p(95)=7µs
+     http_req_connecting............: avg=5.06µs   min=0s       med=0s       max=554µs    p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=568.6ms  min=182.45ms med=553.62ms max=1.35s    p(90)=761.11ms p(95)=825.9ms
+       { expected_response:true }...: avg=568.6ms  min=182.45ms med=553.62ms max=1.35s    p(90)=761.11ms p(95)=825.9ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 1000
+     http_req_receiving.............: avg=26.21ms  min=4.73ms   med=22.64ms  max=126.82ms p(90)=38.65ms  p(95)=46.83ms
+     http_req_sending...............: avg=24.28µs  min=6µs      med=20µs     max=500µs    p(90)=36µs     p(95)=40µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=542.36ms min=166.09ms med=529.79ms max=1.33s    p(90)=732.27ms p(95)=797ms
+     http_reqs......................: 1000    16.712254/s
+     iteration_duration.............: avg=578.23ms min=190.45ms med=563.67ms max=1.36s    p(90)=769.89ms p(95)=836.65ms
+     iterations.....................: 1000    16.712254/s
+     vus............................: 1       min=1       max=10
+     vus_max........................: 10      min=10      max=10
+
+
+running (00m59.8s), 00/10 VUs, 1000 complete and 0 interrupted iterations
+remote-schemas-10k ✓ [======================================] 10 VUs  00m59.8s/10m0s  1000/1000 iters, 100 per VU
+Running 1000 requests test @ http://localhost:3003/v1/graphql
+10 connections
+
+┌─────────┬────────┬────────┬────────┬────────┬───────────┬───────────┬────────────┐
+│ Stat    │ 2.5%   │ 50%    │ 97.5%  │ 99%    │ Avg       │ Stdev     │ Max        │
+├─────────┼────────┼────────┼────────┼────────┼───────────┼───────────┼────────────┤
+│ Latency │ 360 ms │ 559 ms │ 880 ms │ 968 ms │ 574.37 ms │ 136.47 ms │ 1099.94 ms │
+└─────────┴────────┴────────┴────────┴────────┴───────────┴───────────┴────────────┘
+┌───────────┬─────────┬─────────┬───────┬─────────┬─────────┬─────────┬─────────┐
+│ Stat      │ 1%      │ 2.5%    │ 50%   │ 97.5%   │ Avg     │ Stdev   │ Min     │
+├───────────┼─────────┼─────────┼───────┼─────────┼─────────┼─────────┼─────────┤
+│ Req/Sec   │ 3       │ 10      │ 17    │ 19      │ 16.95   │ 2.53    │ 3       │
+├───────────┼─────────┼─────────┼───────┼─────────┼─────────┼─────────┼─────────┤
+│ Bytes/Sec │ 6.88 MB │ 22.7 MB │ 39 MB │ 43.5 MB │ 38.8 MB │ 5.77 MB │ 6.87 MB │
+└───────────┴─────────┴─────────┴───────┴─────────┴─────────┴─────────┴─────────┘
+
+Req/Bytes counts sampled once per second.
+
+┌────────────┬──────────────┐
+│ Percentile │ Latency (ms) │
+├────────────┼──────────────┤
+│ 0.001      │ 197          │
+├────────────┼──────────────┤
+│ 0.01       │ 197          │
+├────────────┼──────────────┤
+│ 0.1        │ 197          │
+├────────────┼──────────────┤
+│ 1          │ 333          │
+├────────────┼──────────────┤
+│ 2.5        │ 360          │
+├────────────┼──────────────┤
+│ 10         │ 409          │
+├────────────┼──────────────┤
+│ 25         │ 481          │
+├────────────┼──────────────┤
+│ 50         │ 559          │
+├────────────┼──────────────┤
+│ 75         │ 650          │
+├────────────┼──────────────┤
+│ 90         │ 765          │
+├────────────┼──────────────┤
+│ 97.5       │ 880          │
+├────────────┼──────────────┤
+│ 99         │ 968          │
+├────────────┼──────────────┤
+│ 99.9       │ 1087         │
+├────────────┼──────────────┤
+│ 99.99      │ 1099         │
+├────────────┼──────────────┤
+│ 99.999     │ 1099         │
+└────────────┴──────────────┘
+
+1k requests in 59.07s, 2.29 GB read
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: /Users/lavysh/Source/BakingBad/DipDup/federation-bench/graphql-bench/app/queries/bin/k6/loadScript.js
+     output: json (/Users/lavysh/Source/BakingBad/DipDup/federation-bench/graphql-bench/app/queries/src/executors/k6/tmp/k6_raw_stats.json)
+
+  scenarios: (100.00%) 1 scenario, 10 max VUs, 1m30s max duration (incl. graceful stop):
+           * remote-schemas-Max1k: 10 looping VUs for 1m0s (gracefulStop: 30s)
+
+
+     ✓ is status 200
+     ✓ no error in body
+
+     checks.........................: 100.00% ✓ 17194      ✗ 0
+     data_received..................: 2.0 GB  33 MB/s
+     data_sent......................: 2.6 MB  44 kB/s
+     http_req_blocked...............: avg=6.23µs  min=0s      med=3µs     max=2.09ms   p(90)=5µs     p(95)=5µs
+     http_req_connecting............: avg=497ns   min=0s      med=0s      max=468µs    p(90)=0s      p(95)=0s
+     http_req_duration..............: avg=68.04ms min=28.52ms med=65.29ms max=179.63ms p(90)=95.02ms p(95)=106.1ms
+       { expected_response:true }...: avg=68.04ms min=28.52ms med=65.29ms max=179.63ms p(90)=95.02ms p(95)=106.1ms
+     http_req_failed................: 0.00%   ✓ 0          ✗ 8597
+     http_req_receiving.............: avg=2.85ms  min=49µs    med=2.11ms  max=45.21ms  p(90)=4.84ms  p(95)=6.57ms
+     http_req_sending...............: avg=45.46µs min=4µs     med=19µs    max=15.49ms  p(90)=29µs    p(95)=37µs
+     http_req_tls_handshaking.......: avg=0s      min=0s      med=0s      max=0s       p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=65.14ms min=25.68ms med=62.47ms max=179.46ms p(90)=91.91ms p(95)=103.55ms
+     http_reqs......................: 8597    143.168512/s
+     iteration_duration.............: avg=69.81ms min=29.17ms med=67.05ms max=181.17ms p(90)=96.96ms p(95)=108.06ms
+     iterations.....................: 8597    143.168512/s
+     vus............................: 10      min=10       max=10
+     vus_max........................: 10      min=10       max=10
+
+
+running (1m00.0s), 00/10 VUs, 8597 complete and 0 interrupted iterations
+remote-schemas-Max1k ✓ [======================================] 10 VUs  1m0s
+Running 60s test @ http://localhost:3003/v1/graphql
+10 connections
+
+┌─────────┬───────┬───────┬────────┬────────┬──────────┬──────────┬───────────┐
+│ Stat    │ 2.5%  │ 50%   │ 97.5%  │ 99%    │ Avg      │ Stdev    │ Max       │
+├─────────┼───────┼───────┼────────┼────────┼──────────┼──────────┼───────────┤
+│ Latency │ 36 ms │ 65 ms │ 116 ms │ 130 ms │ 67.98 ms │ 20.85 ms │ 178.51 ms │
+└─────────┴───────┴───────┴────────┴────────┴──────────┴──────────┴───────────┘
+┌───────────┬─────────┬─────────┬─────────┬─────────┬─────────┬────────┬─────────┐
+│ Stat      │ 1%      │ 2.5%    │ 50%     │ 97.5%   │ Avg     │ Stdev  │ Min     │
+├───────────┼─────────┼─────────┼─────────┼─────────┼─────────┼────────┼─────────┤
+│ Req/Sec   │ 136     │ 137     │ 146     │ 151     │ 146.04  │ 3.19   │ 136     │
+├───────────┼─────────┼─────────┼─────────┼─────────┼─────────┼────────┼─────────┤
+│ Bytes/Sec │ 31.2 MB │ 31.4 MB │ 33.5 MB │ 34.6 MB │ 33.5 MB │ 729 kB │ 31.2 MB │
+└───────────┴─────────┴─────────┴─────────┴─────────┴─────────┴────────┴─────────┘
+
+Req/Bytes counts sampled once per second.
+
+┌────────────┬──────────────┐
+│ Percentile │ Latency (ms) │
+├────────────┼──────────────┤
+│ 0.001      │ 25           │
+├────────────┼──────────────┤
+│ 0.01       │ 25           │
+├────────────┼──────────────┤
+│ 0.1        │ 28           │
+├────────────┼──────────────┤
+│ 1          │ 33           │
+├────────────┼──────────────┤
+│ 2.5        │ 36           │
+├────────────┼──────────────┤
+│ 10         │ 43           │
+├────────────┼──────────────┤
+│ 25         │ 54           │
+├────────────┼──────────────┤
+│ 50         │ 65           │
+├────────────┼──────────────┤
+│ 75         │ 80           │
+├────────────┼──────────────┤
+│ 90         │ 96           │
+├────────────┼──────────────┤
+│ 97.5       │ 116          │
+├────────────┼──────────────┤
+│ 99         │ 130          │
+├────────────┼──────────────┤
+│ 99.9       │ 154          │
+├────────────┼──────────────┤
+│ 99.99      │ 178          │
+├────────────┼──────────────┤
+│ 99.999     │ 178          │
+└────────────┴──────────────┘
+
+9k requests in 60.05s, 2.01 GB read

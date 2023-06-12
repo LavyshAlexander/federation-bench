@@ -1,14 +1,31 @@
 url: http://localhost:3003/v1/graphql
 headers:
-  X-Hasura-Admin-Secret: 1q2a3z4w5s6x
+  X-Hasura-Admin-Secret: qwerty
 queries:
-  - name: remote-schemas-10k
+  - name: remote-schemas-10
     tools: [ k6, autocannon ]
     execution_strategy: FIXED_REQUEST_NUMBER
     requests: 1000
     query: |
       query Token {
-        token(limit: 10000) {
+        token(limit: 10) {
+          address
+          decimals
+          id
+          name
+          standard
+          symbol
+          thumbnail_uri
+          token_id
+        }
+      }
+  - name: remote-schemas-100
+    tools: [ k6, autocannon ]
+    execution_strategy: FIXED_REQUEST_NUMBER
+    requests: 1000
+    query: |
+      query Token {
+        token(limit: 100) {
           address
           decimals
           id
@@ -36,30 +53,13 @@ queries:
           token_id
         }
       }
-  - name: remote-schemas-10
+  - name: remote-schemas-10k
     tools: [ k6, autocannon ]
     execution_strategy: FIXED_REQUEST_NUMBER
     requests: 1000
     query: |
       query Token {
-        token(limit: 10) {
-          address
-          decimals
-          id
-          name
-          standard
-          symbol
-          thumbnail_uri
-          token_id
-        }
-      }
-  - name: remote-schemas-100
-    tools: [ k6, autocannon ]
-    execution_strategy: FIXED_REQUEST_NUMBER
-    requests: 1000
-    query: |
-      query Token {
-        token(limit: 100) {
+        token(limit: 10000) {
           address
           decimals
           id
