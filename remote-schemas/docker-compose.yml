@@ -11,13 +11,13 @@ services:
       - hasura-metadata
     restart: always
     environment:
-      - HASURA_GRAPHQL_METADATA_DATABASE_URL=postgres://dipdup:${POSTGRES_PASSWORD:-1q2a3z4w5s6x}@db:5432/dipdup
+      - HASURA_GRAPHQL_METADATA_DATABASE_URL=postgres://dipdup:${POSTGRES_PASSWORD:-qwerty}@db:5432/dipdup
       - HASURA_GRAPHQL_ENABLE_CONSOLE=true
       - HASURA_GRAPHQL_DEV_MODE=true
       - HASURA_GRAPHQL_ENABLED_LOG_TYPES=startup, http-log, websocket-log, query-log
       - HASURA_GRAPHQL_LOG_LEVEL=warn
       - HASURA_GRAPHQL_ENABLE_TELEMETRY=false
-      - HASURA_GRAPHQL_ADMIN_SECRET=${ADMIN_SECRET:-1q2a3z4w5s6x}
+      - HASURA_GRAPHQL_ADMIN_SECRET=${ADMIN_SECRET:-qwerty}
       - HASURA_GRAPHQL_UNAUTHORIZED_ROLE=user
       - HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS=true
 
@@ -29,15 +29,16 @@ services:
       - db-dex
     restart: always
     environment:
-      - HASURA_GRAPHQL_METADATA_DATABASE_URL=postgres://dipdup:${POSTGRES_PASSWORD:-1q2a3z4w5s6x}@db-dex:5432/dipdup
+      - HASURA_GRAPHQL_METADATA_DATABASE_URL=postgres://dipdup:${POSTGRES_PASSWORD:-qwerty}@db-dex:5432/dipdup
       - HASURA_GRAPHQL_ENABLE_CONSOLE=true
       - HASURA_GRAPHQL_DEV_MODE=true
       - HASURA_GRAPHQL_ENABLED_LOG_TYPES=startup, http-log, websocket-log, query-log
       - HASURA_GRAPHQL_LOG_LEVEL=warn
       - HASURA_GRAPHQL_ENABLE_TELEMETRY=false
-      - HASURA_GRAPHQL_ADMIN_SECRET=${ADMIN_SECRET:-1q2a3z4w5s6x}
+      - HASURA_GRAPHQL_ADMIN_SECRET=${ADMIN_SECRET:-qwerty}
       - HASURA_GRAPHQL_UNAUTHORIZED_ROLE=user
       - HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS=true
+      - HASURA_GRAPHQL_PG_CONNECTIONS=100
 
   hasura-metadata:
     image: hasura/graphql-engine:v2.25.1
@@ -47,15 +48,16 @@ services:
       - db-metadata
     restart: always
     environment:
-      - HASURA_GRAPHQL_METADATA_DATABASE_URL=postgres://dipdup:${POSTGRES_PASSWORD:-1q2a3z4w5s6x}@db-metadata:5432/dipdup
+      - HASURA_GRAPHQL_METADATA_DATABASE_URL=postgres://dipdup:${POSTGRES_PASSWORD:-qwerty}@db-metadata:5432/dipdup
       - HASURA_GRAPHQL_ENABLE_CONSOLE=true
       - HASURA_GRAPHQL_DEV_MODE=true
       - HASURA_GRAPHQL_ENABLED_LOG_TYPES=startup, http-log, websocket-log, query-log
       - HASURA_GRAPHQL_LOG_LEVEL=warn
       - HASURA_GRAPHQL_ENABLE_TELEMETRY=false
-      - HASURA_GRAPHQL_ADMIN_SECRET=${ADMIN_SECRET:-1q2a3z4w5s6x}
+      - HASURA_GRAPHQL_ADMIN_SECRET=${ADMIN_SECRET:-qwerty}
       - HASURA_GRAPHQL_UNAUTHORIZED_ROLE=user
       - HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS=true
+      - HASURA_GRAPHQL_PG_CONNECTIONS=100
 
   db:
     image: postgres:15.3
@@ -66,7 +68,7 @@ services:
     environment:
       - POSTGRES_USER=dipdup
       - POSTGRES_DB=dipdup
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-1q2a3z4w5s6x}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-qwerty}
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U dipdup" ]
       interval: 10s
@@ -82,7 +84,7 @@ services:
     environment:
       - POSTGRES_USER=dipdup
       - POSTGRES_DB=dipdup
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-1q2a3z4w5s6x}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-qwerty}
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U dipdup" ]
       interval: 10s
@@ -98,7 +100,7 @@ services:
     environment:
       - POSTGRES_USER=dipdup
       - POSTGRES_DB=dipdup
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-1q2a3z4w5s6x}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-qwerty}
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U dipdup" ]
       interval: 10s
